@@ -68,7 +68,7 @@ def validate_data(data):
             raise ValidationError(f'Field {field} is required')
 ```
 
-Use it for configuring Django CharField choices
+Use it for configuring Django CharField choices and default
 ```python
 # file: path/to/constants.py
 # ==========================
@@ -81,11 +81,18 @@ class AcceptableAnimalType(ConstantNamespace):
     TURTLE = 'turtle'
     
 
+class KennelSize(ConstantNamespace):
+    SMALL = '6X8'
+    MEDIUM = '8X10'
+    LARGE = '10X12'
+
 # file: path/to/models.py
-from path.to.constants import AcceptableAnimalType
+from path.to.constants import AcceptableAnimalType, KennelSize
 
 
 class BoardingStay(models.Model):
+    kennel_size = models.CharField(max_length=25, 
+                                   default=KennelSize.MEDIUM)
     animal_type = models.CharField(max_length=50, 
                                    choices=AcceptableAnimalType.choices())
 ```
