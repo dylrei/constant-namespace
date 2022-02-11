@@ -1,1 +1,1 @@
-from constant_namespace import ConstantNamespace
+from .constant_namespace import ConstantNamespace
