@@ -1,7 +1,11 @@
 class ConstantNamespace(object):
     @classmethod
     def as_dict(cls):
-        return {k: v for (k, v) in cls.__dict__.items() if not k.startswith('_')}
+        return {
+            k: v
+            for (k, v) in cls.__dict__.items()
+            if not k.startswith('_')
+        }
 
     @classmethod
     def keys(cls):
@@ -18,7 +22,7 @@ class ConstantNamespace(object):
 
     @classmethod
     def choices(cls):
-        # provides items with the ordering that Django CharField(choices=...) expects
+        # provides ordering that Django CharField(choices=...) expects
         return sorted([(v, k) for k, v in cls.items()])
 
     @classmethod
